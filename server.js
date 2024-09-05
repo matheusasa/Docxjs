@@ -1,9 +1,16 @@
 const express = require('express');
-const axios = require('axios');
 const { generateWord } = require('./functions/generateword');
 
 const app = express();
 const port = 3000;
+
+// Middleware para adicionar cabeçalhos CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.2.15:8080'); // Substitua pela URL do seu frontend
+    res.setHeader('Access-Control-Allow-Methods', 'GET'); // Métodos permitidos
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Cabeçalhos permitidos
+    next();
+});
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
